@@ -12,10 +12,20 @@ const colors = [
   "255 0 0", // Red
   "0 0 255", // Blue
   "255 255 0", // Yellow
+  "0 0 0", // black
 ];
 
-const getRandomInt = (min: number, max: number): number => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+const getRandomInt = (min: number, mid: number, max: number): number => {
+  // Genera un número aleatorio entre 0 y 1
+  const random = Math.random();
+
+  if (random < 0.5) {
+    // Si el número aleatorio es menor que 0.5, generar un número en el rango [min, mid)
+    return Math.floor(Math.random() * (mid - min)) + min;
+  } else {
+    // Si el número aleatorio es mayor o igual que 0.5, generar un número en el rango [mid, max]
+    return Math.floor(Math.random() * (max - mid + 1)) + mid;
+  }
 };
 
 const getRandomElement = <T>(arr: T[]): T => {
@@ -24,11 +34,11 @@ const getRandomElement = <T>(arr: T[]): T => {
 
 export const generateRandomCrosshair = (): CrosshairConfig => {
   return {
-    size: getRandomInt(1, 2), // Limitar tamaño entre 1 y 2
-    thickness: getRandomInt(0, 1),
-    gap: getRandomInt(-4, -3), // Limitar gap entre -4 y -3
+    size: getRandomInt(1, 1.5, 2), // Limitar tamaño entre 1 y 2
+    thickness: getRandomInt(0, 0.5, 1),
+    gap: getRandomInt(-4, -3.5, -3), // Limitar gap entre -4 y -3
     color: getRandomElement(colors),
-    outline: Math.random() < 0.5,
+    outline: Math.random() < 1,
   };
 };
 

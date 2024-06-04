@@ -1,4 +1,3 @@
-// src/components/CrosshairGenerator.tsx
 "use client";
 import React, { useState, useEffect } from "react";
 import {
@@ -6,12 +5,12 @@ import {
   generateRandomCrosshair,
 } from "../utils/generator";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import { ModeToggle } from "@/components/toggle";
 import { toast, useToast } from "@/components/ui/use-toast";
+import CanvasCrosshair from "./CanvasCrosshair";
 
 const CrosshairGenerator: React.FC = () => {
-  const { toast } = useToast()
+  const { toast } = useToast();
   const [crosshairConfig, setCrosshairConfig] = useState(
     generateRandomCrosshair()
   );
@@ -31,7 +30,7 @@ const CrosshairGenerator: React.FC = () => {
     navigator.clipboard.writeText(commands);
     toast({
       title: "Crosshair Copiada! ✅ ",
-      description: "Solo tenes que abrir la consola y pegar el codigo",
+      description: "Solo tenes que abrir la consola y pegar el código",
     });
   };
 
@@ -63,6 +62,7 @@ const CrosshairGenerator: React.FC = () => {
         <p className="p-4 rounded-lg mt-2 text-left dark:bg-slate-800 bg-gray-200">
           {crosshairCommands}
         </p>
+        <CanvasCrosshair {...crosshairConfig} />
         <div className="flex items-center justify-start gap-2 mt-4">
           <Button
             onClick={handleCopy}
