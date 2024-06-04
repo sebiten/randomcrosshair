@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import d2 from '../../../public/d2.webp'; // Importa la imagen de fondo
 
 interface CrosshairProps {
   size: number;
@@ -23,13 +24,13 @@ const CanvasCrosshair: React.FC<CrosshairProps> = ({ size, thickness, gap, color
 
       if (outline) {
         // Dibujar el outline de la mira
-        ctx.lineWidth = thickness * 5 + 2; // Ajustar el grosor del outline
+        ctx.lineWidth = thickness * 5 + 3; // Ajustar el grosor del outline
         ctx.strokeStyle = 'rgba(0, 0, 0, 1)'; // Outline negro con máxima opacidad
         drawCrosshair(ctx, canvas.width / 2, canvas.height / 2, size * 10, gap * 10);
       }
 
       // Dibujar la mira principal
-      ctx.lineWidth = thickness * 5; // Escalar el grosor
+      ctx.lineWidth = thickness * 4; // Escalar el grosor
       ctx.strokeStyle = `rgb(${r}, ${g}, ${b})`;
       drawCrosshair(ctx, canvas.width / 2, canvas.height / 2, size * 10, gap * 10);
     }
@@ -53,7 +54,12 @@ const CanvasCrosshair: React.FC<CrosshairProps> = ({ size, thickness, gap, color
     ctx.stroke();
   };
 
-  return <canvas ref={canvasRef}  className='bg-slate-800 w-auto' style={{border: '1px solid black'}} />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className='aspect-h-16 dark:bg-slate-800 mt-2 rounded-xl'
+    />
+  );
 };
 
 export default CanvasCrosshair;
